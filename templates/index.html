@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.min.css') }}>
+
+    <title>{{ title }}</title>
+  </head>
+<body>
+    <div class="container">
+        <br>
+        <div class="jumbotron">
+            <h1 class="display-3">{{ title }}</h1>
+            <p class="lead">by Michael Hodis for Anymind Group</p>
+            <hr class="my-4">
+        </div>
+        <br>
+        <div>
+            <p class="lead">Start exploring the app from the following endpoints:</p>
+            <ul>
+                <li><a href={{ url_for('search_hashtags', hashtag='HelloWorld') }}>/hashtags/HelloWorld/</a></li>
+                <li><a href="{{ url_for('search_users', username='Twitter') }}">/users/Twitter/</a></li>
+            </ul>
+            <p class="lead">or construct your own request...</p>
+            <footer class="blockquote-footer">You can use <b><i>?pages_limit=value</i></b> parameter as well</footer>
+        </div>
+    </div>
+
+{% block js %}
+    <script src={{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}></script>
+    <script src={{ url_for('static', filename='js/popper.min.js') }}></script>
+    <script src={{ url_for('static', filename='js/bootstrap.min.js') }}></script>
+{% endblock %}
+</body>
+</html>
