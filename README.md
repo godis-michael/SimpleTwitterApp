@@ -51,10 +51,10 @@ Replace `SomeHashtag` or `SomeUser` respectively with your information and make 
 
     http://127.0.0.1:5000/users/SomeUser?pages_limit=3
     
-By default returned number of pages is equal to **1**.
+By default a returned number of pages is equal to **1**.
 
-There is also error handling implemented, so if you try to make request with an invalid username, some unexpected value,
-passed to the `?pages_limit` parameter or so on, you will get _json_ object with error description.
+There is also an error handling implemented, so if you try to make a request with an invalid username, some unexpected value,
+passed to the `?pages_limit` parameter or so on, you will get a _json_ object with the error description.
 
 Check this out:
 
