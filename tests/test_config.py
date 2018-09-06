@@ -5,6 +5,7 @@ from decouple import UndefinedValueError
 from base64 import b32encode
 
 from tweepy import TweepError
+from typing import Iterable
 
 from config import PATS, DOT_ENV, TWITTER_VARS, TwitterConfig, init_api
 from SimpleTwitterApp import app
@@ -32,17 +33,51 @@ def generate_tokens(vars, callback=None):
 @pytest.fixture
 def dotenv():
     app.config['TESTING'] = True
-
-    with open(DOT_ENV, 'r+') as f:
-        backup = f.read()
-        if backup:  # clear file if it is not empty
+    file_backup = ''
+    vars_backup = {}
+    try:
+        f = open(DOT_ENV, 'r+')
+        file_backup = f.read()
+        if file_backup:  # clear file if it is not empty
             f.seek(0)
             f.truncate()
 
+        vars_backup = os_make_backup(TWITTER_VARS)
         yield f
 
-    with open(DOT_ENV, 'w+') as f:  # restore previous content
-        f.write(backup)
+    finally:
+        os_restore_backup(vars_backup)
+        with open(DOT_ENV, 'w+') as f:  # restore previous content
+            f.write(file_backup)
+
+
+def os_make_backup(vars: Iterable):
+    """
+    Remove system variables by their names
+
+    :param vars: iterable with system variables names
+    :return: dictionary with names, values of removed variables
+    """
+
+    backup = {}
+    for var in vars:
+        backuped_var = os.environ.pop(var, None)
+        if backuped_var:
+            backup[var] = backuped_var
+
+    return backup
+
+
+def os_restore_backup(backup: dict):
+    """
+    Set system variables from dictionary
+
+    :param backup: dictionary object with system variables names and their values
+    :return: system variables are set
+    """
+
+    for key, value in backup.items():
+        os.environ[key] = value
 
 
 def test_hashtag_match():
