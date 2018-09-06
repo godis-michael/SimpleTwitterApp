@@ -42,8 +42,8 @@ If all required variables are set correctly, you will see a message about server
 Enter a browser and go to that address. You will see the welcome page.
 
 This application has 2 endpoints for retrieving an information from the Twitter:
-* get tweets by a hashtag: _http://127.0.0.1:5000/hashtags/`SomeHashtag`/_
-* get user tweets: _http://127.0.0.1:5000/users/`SomeUser`/_
+* get tweets by a hashtag: _http://127.0.0.1:5000/hashtags/SomeHashtag/_
+* get user tweets: _http://127.0.0.1:5000/users/SomeUser/_
 
 Replace `SomeHashtag` or `SomeUser` respectively with your information and make a request.
 
